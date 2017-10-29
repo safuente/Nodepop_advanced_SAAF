@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table tr td img {
+  max-height: 20px;
+}
+
+ul.lang-switch {
+  margin: 15px;
+  text-align: right;
+  
+}
+ul.lang-switch a {
+color :white;
+}

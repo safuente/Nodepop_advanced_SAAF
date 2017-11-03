@@ -23,7 +23,9 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').__express);
 
 
-app.use(logger('dev'));
+if (process.env.LOG_FORMAT !== 'nolog' ) {
+  app.use(logger(process.env.LOG_FORMAT || 'dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

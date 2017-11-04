@@ -9,6 +9,7 @@ const db = require('./lib/connectMongoose');
 
 // Cargamos las definiciones de todos nuestros modelos
 require('./models/Anuncio');
+const Usuario = require('./models/Usuario');
 
 db.once('open', function () {
 
@@ -29,10 +30,24 @@ db.once('open', function () {
 
 });
 
+async function initUsuarios() {
+  const deleted = await Usuario.remove();
+  console.log(`Eliminados ${deleted.result.n} usuarios.`);
+
+  const inserted = await Usuario.insertMany([
+    { 
+      email: 'user@example.com',
+      password: Usuario.hashPassword('1234') }
+  ]);
+  console.log(`Insertados ${inserted.length} usuarios.`);
+}
+
+
+
 function runInstallScript() {
 
   async.series([
-      initAnuncios
+      initAnuncios, initUsuarios
     ], (err) => {
       if (err) {
         console.error( __('generic', { err }) );
@@ -65,4 +80,9 @@ function initAnuncios(cb) {
 
   });
 
+
+
+
+
 }
+
